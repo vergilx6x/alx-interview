@@ -5,16 +5,16 @@ def pascal_triangle(n):
     list_of_rows = []
 
     if n <= 0:
-        return list_of_rows
+        return []
 
     for row in range(n):
         columns = []
         for col in range(row + 1):
 
             if col == 0 or col == row:
-                columns.append("1")
+                columns.append(1)
             else:
-                columns.append(math.comb(row, col))
+                columns.append((int(math.comb(row, col))))
 
         list_of_rows.append(columns)
 
