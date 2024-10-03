@@ -1,7 +1,6 @@
 #!/usr/bin/python3
-import math
-
 ''' A module for working with Pascal's triangle. '''
+import math
 
 
 def pascal_triangle(n):
