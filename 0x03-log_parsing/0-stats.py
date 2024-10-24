@@ -43,7 +43,7 @@ try:
             line_count += 1
 
         # Every 10 lines, print the statistics
-        if line_count == 10:
+        if line_count == 9:
             print_stats()
             line_count = 0
 
