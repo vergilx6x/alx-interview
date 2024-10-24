@@ -1,28 +1,26 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """A script that reads stdin line by line and computes metrics"""
+
 import re
 import sys
 
-
+# Compile the regular expression to match the log line format
 pattern = re.compile(
     r'^\d{1,3}(\.\d{1,3}){3} - \[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+\] '
     r'"GET \/projects\/260 HTTP\/1\.1" (\d{3}) (\d+)$'
 )
-
 
 line_count = 0
 total_size = 0
 status_codes = {code: 0 for code in ['200', '301', '400', '401',
                                      '403', '404', '405', '500']}
 
-
 def print_stats():
-    ''' Function to print current statistics '''
+    """Function to print current statistics."""
     print(f"File size: {total_size}")
     for code, count in sorted(status_codes.items()):
         if count > 0:
             print(f"{code}: {count}")
-
 
 try:
     # Process log lines from stdin
@@ -43,14 +41,16 @@ try:
             line_count += 1
 
         # Every 10 lines, print the statistics
-        if line_count == 9:
+        if line_count == 10:
             print_stats()
             line_count = 0
 
 except KeyboardInterrupt:
+    # Handle Ctrl + C, print stats and exit gracefully
     print_stats()
     sys.exit(0)
 
-# Print remaining statistics if the input ends before hitting exactly 10 lines
-if line_count > 0:
-    print_stats()
+# Print remaining statistics if input ends before hitting exactly 10 lines
+finally:
+    if line_count > 0:
+        print_stats()
