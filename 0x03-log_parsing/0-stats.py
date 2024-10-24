@@ -15,12 +15,14 @@ total_size = 0
 status_codes = {code: 0 for code in ['200', '301', '400', '401',
                                      '403', '404', '405', '500']}
 
+
 def print_stats():
     """Function to print current statistics."""
     print(f"File size: {total_size}")
     for code, count in sorted(status_codes.items()):
         if count > 0:
             print(f"{code}: {count}")
+
 
 try:
     # Process log lines from stdin
@@ -49,8 +51,3 @@ except KeyboardInterrupt:
     # Handle Ctrl + C, print stats and exit gracefully
     print_stats()
     sys.exit(0)
-
-# Print remaining statistics if input ends before hitting exactly 10 lines
-finally:
-    if line_count > 0:
-        print_stats()
