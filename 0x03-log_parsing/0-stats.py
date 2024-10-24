@@ -51,3 +51,8 @@ except KeyboardInterrupt:
     # Handle Ctrl + C, print stats and exit gracefully
     print_stats()
     sys.exit(0)
+
+# Print remaining statistics if input ends before hitting exactly 10 lines
+finally:
+    if line_count > 0:
+        print_stats()
