@@ -26,28 +26,26 @@ def is_attacking(pos0, pos1):
     return abs(pos0[0] - pos1[0]) == abs(pos0[1] - pos1[1])
 
 
-def build_solution(row, current_solution, solutions, n, positions):
+def build_solution(row, current_solution, solutions, n):
     """Recursively builds solutions for the N queens problem."""
     if row == n:
         solutions.append(current_solution.copy())
         return
     for col in range(n):
-        pos = (row, col)
+        pos = [row, col]
         if all(not is_attacking(pos, queen) for queen in current_solution):
             current_solution.append(pos)
-            build_solution(row + 1, current_solution, solutions, n, positions)
+            build_solution(row + 1, current_solution, solutions, n)
             current_solution.pop()
 
 
 def solve_n_queens(n):
     """Solves the N queens problem for a board of size n."""
     solutions = []
-    build_solution(0, [], solutions, n,
-                   [(i // n, i % n) for i in range(n ** 2)])
+    build_solution(0, [], solutions, n)
     return solutions
 
 
-# Main execution
 n = get_input()
 solutions = solve_n_queens(n)
 for solution in solutions:
